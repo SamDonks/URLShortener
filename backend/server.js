@@ -9,18 +9,9 @@ const port = 5555;
 const databaseUser = process.env.DATABASE_USER;
 const databasePass = process.env.DATABASE_PASS;
 const databaseHost = process.env.DATABASE_HOST;
-const secretKey = process.env.USER_JWT_KEY;
-const adminSecretKey = process.env.ADMIN_JWT_KEY;
+const databaseURL = process.env.DATABASE_URL
 
-const pool = mysql.createPool({
-  host: databaseHost,
-  user: databaseUser,
-  password: databasePass,
-  database: 'urlshortner',
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
-});
+const pool = mysql.createPool(databaseURL);
 
 app.use(bodyParser.json());
 app.use(cors());
