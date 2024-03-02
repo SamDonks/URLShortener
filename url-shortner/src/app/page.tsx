@@ -39,7 +39,7 @@ export default function Home() {
   
   const shortenURL = async () => {
     try {
-      const response = await fetch(`${BASE_API_URL}`, {
+      const response = await fetch(`${BASE_API_URL}/api/generateURL`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
