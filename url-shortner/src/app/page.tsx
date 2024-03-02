@@ -37,29 +37,33 @@ export default function Home() {
       });
   };
   
-  const shortenURL = async () => {
+  const handleShortenURL = async () => {
     try {
-      const response = await fetch(`${BASE_API_URL}api/generateURL`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          longUrl: userURL
-        })
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setShortenedURL('https://long-blue-angelfish-coat.cyclic.app/' + data.shortUrl);
-        setButtonText('Copy')
-        // Do something with the shortened URL, such as displaying it to the user
-      } else {
-        console.error('Error shortening URL');
-      }
+        const response = await fetch('https://long-blue-angelfish-coat.cyclic.app/api/generateURL', {
+            method: 'POST', // Specify the HTTP method
+            headers: {
+                'Content-Type': 'application/json' // Specify the content type of the request body
+            },
+            body: JSON.stringify({ longUrl: userURL }) // Pass the user's URL input
+        });
+
+        // Check if the request was successful (status code 200)
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Shortened URL:', data.shortUrl);
+            setShortenedURL('https://long-blue-angelfish-coat.cyclic.app/' + data.shortUrl);
+            setButtonText('Copy');
+        } else {
+            // Handle error responses
+            console.error('Error:', response.status);
+            const errorData = await response.json();
+            console.error('Error details:', errorData);
+        }
     } catch (error) {
-      console.error('Error fetching data:', error);
+        console.error('Error fetching data:', error);
+        // Handle network or server errors
     }
-  };
+};
   return (
     <div className="h-[40rem] w-full rounded-md bg-neutral-950 relative flex flex-col items-center justify-center antialiased align-center">
       <div className="max-w-2xl mx-auto p-4 z-10">
@@ -78,7 +82,7 @@ export default function Home() {
           value={shortenedURL || userURL}
           onChange={handleInputChange}
         />
-        <button onClick={shortenedURL ? handleCopy : shortenURL} className="inline-flex h-12 mt-3 animate-shimmer items-center justify-center rounded-md border border-neutral-800 bg-[linear-gradient(110deg,#000103,45%,#262626,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-neutral-400 transition-colors">
+        <button onClick={shortenedURL ? handleCopy : handleShortenURL} className="inline-flex h-12 mt-3 animate-shimmer items-center justify-center rounded-md border border-neutral-800 bg-[linear-gradient(110deg,#000103,45%,#262626,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-neutral-400 transition-colors">
         {buttonText}
       </button>
       </div>
