@@ -8,6 +8,7 @@ import { Button } from "../components/ui/moving-border";
 
 export default function Home() {
 
+  const BASE_API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
   const [userURL, setUserURL] = useState('');
   const [shortenedURL, setShortenedURL] = useState('');
   const [buttonText, setButtonText] = useState('Shorten URL');
@@ -38,7 +39,7 @@ export default function Home() {
   
   const shortenURL = async () => {
     try {
-      const response = await fetch('https://urlshortener-sigma-seven.vercel.app/api/generateURL', {
+      const response = await fetch(`${BASE_API_URL}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,7 +50,7 @@ export default function Home() {
       });
       if (response.ok) {
         const data = await response.json();
-        setShortenedURL('https://urlshortner-backend-nine.vercel.app/' + data.shortUrl);
+        setShortenedURL('https://long-blue-angelfish-coat.cyclic.app/' + data.shortUrl);
         setButtonText('Copy')
         // Do something with the shortened URL, such as displaying it to the user
       } else {
