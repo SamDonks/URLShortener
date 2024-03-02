@@ -4,7 +4,7 @@ const dotenv = require('dotenv').config()
 const cors = require('cors');
 const mysql = require('mysql2');
 const app = express();
-const port = 5555;
+const port = "https://urlshortner-backend-nine.vercel.app/";
 
 const databaseUser = process.env.DATABASE_USER;
 const databasePass = process.env.DATABASE_PASS;
@@ -98,5 +98,5 @@ app.get('/:shortUrl', async (req, res) => {
 
 // Start the server
 app.listen(port, () => {
-    console.log(`Server is listening at http://localhost:${port}`);
+    console.log(`Server is listening at ${port}`);
 });

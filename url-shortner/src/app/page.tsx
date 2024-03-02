@@ -38,7 +38,7 @@ export default function Home() {
   
   const shortenURL = async () => {
     try {
-      const response = await fetch('http://localhost:5555/api/generateURL', {
+      const response = await fetch('https://urlshortener-sigma-seven.vercel.app/api/generateURL', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export default function Home() {
       });
       if (response.ok) {
         const data = await response.json();
-        setShortenedURL('http://localhost:5555/' + data.shortUrl);
+        setShortenedURL('https://urlshortner-backend-nine.vercel.app/' + data.shortUrl);
         setButtonText('Copy')
         // Do something with the shortened URL, such as displaying it to the user
       } else {

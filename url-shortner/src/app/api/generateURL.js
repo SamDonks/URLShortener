@@ -4,7 +4,7 @@ import { headers } from 'next/headers'
 export async function POST(req, res) {
     if (req.method === 'POST') {
         try {
-            const response = await fetch('http://localhost:5555/api/generateURL', {
+            const response = await fetch('https://urlshortner-backend-nine.vercel.app/api/generateURL', {
                 method: 'POST', // Specify the HTTP method
                 headers: {
                     'Content-Type': 'application/json' // Specify the content type of the request body
