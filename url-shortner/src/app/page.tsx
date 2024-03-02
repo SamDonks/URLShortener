@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React from "react";
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { BackgroundBeams } from "../components/ui/background-beams";
 import { Button } from "../components/ui/moving-border";
 
@@ -13,7 +13,7 @@ export default function Home() {
   const [buttonText, setButtonText] = useState('Shorten URL');
 
   // Function to handle input change
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserURL(e.target.value);
   };
 
